@@ -7,19 +7,19 @@
 using namespace std;
 
 
-class SystemTicket
+class TicketGen
 {
 protected:
 	int ID;
 	int ticket;
 	int getPriority;
-	string FullName, getType, getDescription, getImpact, Ticket_ID, TicketStatus, Priority;
+	string userName, getType, getDescription, getImpact, Ticket_ID, TicketStatus, Priority;
 public:	
 
-	SystemTicket() {};
-	SystemTicket(string t, string a, string c, string i)
+	TicketGen() {};
+	TicketGen(string t, string a, string c, string i)
 	{
-		FullName = t; getType = a;
+		userName = t; getType = a;
 		getImpact = c; getDescription = i;
 
 	}
@@ -29,11 +29,11 @@ public:
 	virtual string GetInformation(string a) = 0;
 };
 
-class Ticket : public SystemTicket
+class Ticket : public TicketGen
 {
 public:
 	Ticket() {};
-	Ticket(string t, string a, string c, string i, string e) : SystemTicket(t, a, c, i)
+	Ticket(string t, string a, string c, string i, string e) : TicketGen(t, a, c, i)
 	{
 	}
 	void Display();
@@ -46,7 +46,7 @@ void Ticket::CaptureData()
 {
 	
 	cout << "UserName: ";
-	getline(cin, FullName);
+	getline(cin, userName);
 	cout << endl << "What type of issue is this? (S)erver, (A)pplication, a(C)cess" << endl;
 	getline(cin, getType);
 	cout << endl << "How many users does this impact?";
@@ -77,7 +77,7 @@ string Ticket::GetInformation(string a)
 
 void Ticket::Display()
 {
-	cout << "Customers Full Name: " << FullName << endl;
+	cout << "Customers Full Name: " << userName << endl;
 	cout << "Service Issue: " << getType << endl;
 	cout << "How many users impacted: " << getImpact << endl;
 	cout << "Description: " << endl;
@@ -88,14 +88,14 @@ void Ticket::Display()
 
 int main()
 {
-	SystemTicket **tlist;
+	TicketGen **tlist;
 	int count=100;
 	char ptype;
 	bool isOver = false;
 
 	
 
-	tlist = new SystemTicket*[count];
+	tlist = new TicketGen*[count];
 
 	for (int i = 0; i < count; i++)
 	{
@@ -118,13 +118,13 @@ int main()
 			}
 	}
 	if (isOver == true) {
-		//Extra credit
+		
 	}
 
 
 	for (int i = 0; i < count; i++)
 	{
-		cout << "Ticket Identification: " << i+1000 << endl;
+		cout << "Ticket ID: " << i+0001 << endl;
 		tlist[i]->Display();
 		cout << endl;
 	}
